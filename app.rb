@@ -13,6 +13,23 @@ class App < Sinatra::Base
     "Hello #{@user_name}!"
   end
 
+all_the_medicines = [
+  #@Medicine:0x007fb739b1af88 @id=1, @name="penicillin" @group="antibiotic">,
+  #@Medicine:0x007fb739b1af88 @id=2, @name="advil" @group="anti-inflammatory">,
+  #@Medicine:0x007fb739b1af88 @id=3, @name="benadryl" @group="anti-histamine">
+]
   # Code your final two routes here:
-
+  get '/medicines/id' do
+  @medicine= all_the_medicines.select do |medicine|
+    medicine.id == params[:id]
+  end.first
+  erb :'/medicines/show.html'
+  
+  get '/goodbye' do
+    "Goodbye World!"
+  end
+  get "/goodbye/:name" do
+    @user_name = params[:name]
+    "Goodbye #{@user_name}!"
+  end 
 end
